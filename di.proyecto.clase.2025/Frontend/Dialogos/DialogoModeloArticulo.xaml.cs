@@ -1,19 +1,8 @@
 ﻿using di.proyecto.clase._2025.Backend.Modelos;
 using di.proyecto.clase._2025.Backend.Servicios;
 using MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace di.proyecto.clase._2025.Frontend.Dialogos
 {
@@ -23,6 +12,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     public partial class DialogoModeloArticulo : MetroWindow
     {
         private DiinventarioexamenContext _context;
+        private ILogger<GenericRepository<Modeloarticulo>> _logger; 
         private ModeloArticuloRespository _modeloArticuloRepository;
         private TipoArticuloRepository _tipoArticuloRepository;
         public DialogoModeloArticulo()
@@ -33,11 +23,16 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         private async void diagModeloArticulo_Loaded(object sender, RoutedEventArgs e)
         {
             _context = new DiinventarioexamenContext();
-            _modeloArticuloRepository = new ModeloArticuloRespository(_context, null);
+            _logger = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();
+            }).CreateLogger<GenericRepository<Modeloarticulo>>();
+            _modeloArticuloRepository = new ModeloArticuloRespository(_context, _logger);
             _tipoArticuloRepository = new TipoArticuloRepository(_context, null);
 
             //Cargamos los tipos de artículo en el ComboBox
-            cmbTipoArticulo.ItemsSource = _tipoArticuloRepository.GetAllAsync().Result.ToList();
+            List<Tipoarticulo> tipos = await _tipoArticuloRepository.GetAllAsync();
+            cmbTipoArticulo.ItemsSource = tipos;
         }
 
         private async void btnGuardarModeloArticulo_Click(object sender, RoutedEventArgs e)
@@ -65,6 +60,15 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
 
         private void RecogeDatos(Modeloarticulo modeloarticulo)
         {
+            modeloarticulo.Nombre = txtNombre.Text;
+            modeloarticulo.Descripcion = txtDescripcion.Text;
+            modeloarticulo.Marca = txtMarca.Text;
+            modeloarticulo.Modelo = txtModelo.Text;
+
+            if (cmbTipoArticulo.SelectedItem != null)
+            {
+                modeloarticulo.TipoNavigation = (Tipoarticulo)cmbTipoArticulo.SelectedItem;
+            }
 
         }
 

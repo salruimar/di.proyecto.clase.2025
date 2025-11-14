@@ -1,5 +1,6 @@
 ﻿using di.proyecto.clase._2025.Backend.Modelos;
 using di.proyecto.clase._2025.Backend.Servicios;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +25,21 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     {
         private DiinventarioexamenContext _context;
         private UsuarioRepository _usuarioRepo;
+        private ILogger<GenericRepository<Usuario>> _logger;
 
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void ventana_Loaded(object sender, RoutedEventArgs e)
+        {
             _context = new DiinventarioexamenContext();
-            _usuarioRepo = new UsuarioRepository(_context, null);
+            _logger = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();
+            }).CreateLogger<GenericRepository<Usuario>>();
+            _usuarioRepo = new UsuarioRepository(_context, _logger);
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -54,5 +64,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
     }
 }
