@@ -48,10 +48,11 @@
                   Grid.Row="5" Grid.Column="1" Margin="20,0,10,0" 
                   x:Name="cmbTipoArticulo"
                   DisplayMemberPath="Nombre">
-            <!-- Aquí se pueden añadir los tipos de artículo como ComboBoxItems o enlazar a una colección -->
+            <!-- Aquí se pueden añadir los tipos de artículo como ComboBoxItems o enlazar a una colección
             <ComboBoxItem Content="Tipo 1"/>
             <ComboBoxItem Content="Tipo 2"/>
             <ComboBoxItem Content="Tipo 3"/>
+             -->
         </ComboBox>
 
         <TextBlock Text="Descripción: " FontSize="15" FontWeight="Bold" Grid.Row="6" Margin="20,10,0,0"/>

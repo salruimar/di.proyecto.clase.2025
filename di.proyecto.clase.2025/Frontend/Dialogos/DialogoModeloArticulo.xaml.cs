@@ -31,8 +31,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             _tipoArticuloRepository = new TipoArticuloRepository(_context, null);
 
             //Cargamos los tipos de artículo en el ComboBox
-            List<Tipoarticulo> tipos = await _tipoArticuloRepository.GetAllAsync();
-            cmbTipoArticulo.ItemsSource = tipos;
+            cmbTipoArticulo.ItemsSource = await _tipoArticuloRepository.GetAllAsync();
         }
 
         private async void btnGuardarModeloArticulo_Click(object sender, RoutedEventArgs e)

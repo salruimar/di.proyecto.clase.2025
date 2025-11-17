@@ -1,0 +1,95 @@
+﻿<mah:MetroWindow x:Class="di.proyecto.clase._2025.Frontend.Dialogos.DialogoArticulo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
+        mc:Ignorable="d"
+        Title="DialogoArticulo" Height="650" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.ColumnSpan="2" Background="Purple">
+            <TextBlock Text="AÑADIR ARTÍCULO" Foreground="White" HorizontalAlignment="Center" FontSize="25" Margin="20"/>
+        </Grid>
+
+        <TextBlock Text="Los campos en negrita son obligatorios" FontWeight="Bold" FontSize="15" Grid.Row="1"/>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Text="Características de Artículo: " Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" Margin="20,10,0,0"/>
+
+            <TextBlock Text="Número de serie: " FontSize="15"  Grid.Row="1" Margin="20,10,0,0"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" x:Name="txtNumSerie" Grid.Row="2" Margin="20,0,10,0"/>
+
+            <TextBlock Text="Estado: " FontSize="15"  Grid.Row="1" Grid.Column="1" Margin="20,10,0,0"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" x:Name="txtEstado" Grid.Row="2" Grid.Column="1" Margin="20,0,10,0"/>
+
+            <TextBlock Text="Modelo: " FontWeight="Bold" FontSize="15"  Grid.Row="3" Margin="20,10,0,0"/>
+            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+          Grid.Row="4"  Margin="20,0,10,0" 
+          x:Name="cmbModelo"
+          DisplayMemberPath="Nombre" />
+
+           <TextBlock Text="Fecha: " FontSize="15" Grid.Column="1" FontWeight="Bold" Grid.Row="3" Margin="20,10,0,0"/>
+            <DatePicker x:Name="dpFechaAlta" 
+                Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+                Grid.Row="4" Grid.Column="1" Margin="20,0,10,0"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Datos adicionales del artículo: " FontSize="20" FontWeight="Bold" Margin="20,10,0,0"/>
+            
+            
+        </Grid>
+
+        <Button x:Name="btnCancelarArticulo" 
+       Content="CANCELAR"
+       Margin="420,0,220,0"
+       Style="{StaticResource MaterialDesignRaisedButton}"
+       Background="White"
+       Foreground="#2B2A4C"
+        Grid.Row="4" Grid.Column="1" />
+
+        <Button x:Name="btnGuardarArticulo" 
+       Content="GUARDAR"
+       Margin="620,0,10,0"
+       Style="{StaticResource MaterialDesignRaisedButton}"
+       Background="Indigo"
+       Foreground="White"
+        Grid.Row="4" Grid.Column="1" />
+
+    </Grid>
+</mah:MetroWindow>

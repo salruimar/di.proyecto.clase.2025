@@ -30,5 +30,11 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             DialogoModeloArticulo dialogo = new DialogoModeloArticulo();
             dialogo.ShowDialog();
         }
+
+        private void btnAgregarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            DialogoArticulo dialogo = new DialogoArticulo();
+            dialogo.ShowDialog();
+        }
     }
 }
