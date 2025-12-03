@@ -1,6 +1,7 @@
 ﻿using di.proyecto.clase._2025.Backend.Modelos;
 using di.proyecto.clase._2025.Backend.Servicios;
 using di.proyecto.clase._2025.Frontend.Dialogos;
+using di.proyecto.clase._2025.MVVM;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Configuration;
@@ -63,6 +64,8 @@ namespace di.proyecto.clase._2025
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
 
+            //MVVM
+            services.AddTransient<MVArticulo>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

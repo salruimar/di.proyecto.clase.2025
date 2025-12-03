@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Backend\Modelos\" />
-    <Folder Include="MVVM\" />
     <Folder Include="Recursos\Imagenes\" />
   </ItemGroup>
 
