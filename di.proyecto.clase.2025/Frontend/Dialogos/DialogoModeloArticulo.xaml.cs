@@ -31,7 +31,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         {
             try
             {
-               
+               _mvArticulo.GuardarModeloArticuloAsync();
                 DialogResult = true;
             }
             catch (Exception ex)
