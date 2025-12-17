@@ -17,11 +17,13 @@
     <None Remove="Recursos\Iconos\inventario.png" />
     <None Remove="Recursos\Iconos\matisse.png" />
     <None Remove="Recursos\Iconos\prestamos.png" />
+    <None Remove="Recursos\Imagenes\error.png" />
+    <None Remove="Recursos\Imagenes\info.png" />
+    <None Remove="Recursos\Imagenes\warning.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Backend\Modelos\" />
-    <Folder Include="Recursos\Imagenes\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +46,9 @@
     <Resource Include="Recursos\Iconos\inventario.png" />
     <Resource Include="Recursos\Iconos\matisse.png" />
     <Resource Include="Recursos\Iconos\prestamos.png" />
+    <Resource Include="Recursos\Imagenes\error.png" />
+    <Resource Include="Recursos\Imagenes\info.png" />
+    <Resource Include="Recursos\Imagenes\warning.png" />
   </ItemGroup>
 
 </Project>

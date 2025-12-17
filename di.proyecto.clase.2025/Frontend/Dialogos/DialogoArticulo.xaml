@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
         mc:Ignorable="d"
-        Title="DialogoArticulo" Height="700" Width="800">
+        Title="DialogoArticulo" Height="700" Width="800" Loaded="MetroWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -52,12 +52,14 @@
           Grid.Row="4"  Margin="20,0,10,0" 
           x:Name="cmbModelo"
           DisplayMemberPath="Nombre"
-          ItemsSource="{Binding listaModelos}"/>
+          ItemsSource="{Binding listaModelosArticulos}"
+          SelectedItem="{Binding articulo.ModeloNavigation}"/>
 
            <TextBlock Text="Fecha de alta: " FontSize="15" Grid.Column="1" FontWeight="Bold" Grid.Row="3" Margin="20,10,0,0"/>
             <DatePicker x:Name="dpFechaAlta" 
                 Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
-                Grid.Row="4" Grid.Column="1" Margin="20,0,10,0"/>
+                Grid.Row="4" Grid.Column="1" Margin="20,0,10,0"
+                SelectedDate="{Binding articulo.Fechaalta}"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -84,17 +86,20 @@
             <TextBlock Text="Usuario*: " FontWeight="Bold" Margin="20,10,0,0" FontSize="15" Grid.Row="1" Grid.Column="1"/>
             <ComboBox Grid.Row="2" Grid.Column="1" DisplayMemberPath="Nombre" mat:HintAssist.Hint="Selecciona un usuario"
                       ItemsSource="{Binding listaUsuarios}" Margin="20,10,0,0" x:Name="cmbUsuario"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                      SelectedItem="{Binding articulo.UsuarioAltaNavigation}"/>
 
             <TextBlock Text="Departamento: " FontWeight="Bold" Margin="20,10,0,0" FontSize="15" Grid.Row="3" Grid.Column="1"/>
             <ComboBox Grid.Row="4" Grid.Column="1" DisplayMemberPath="Nombre" mat:HintAssist.Hint="Selecciona un departamento"
                       ItemsSource="{Binding listaDepartamentos}" Margin="20,10,0,0" x:Name="cmbDepartamento"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                      SelectedItem="{Binding articulo.DepartamentoNavigation}"/>
             
             <TextBlock Text="Espacio*: " FontWeight="Bold" Margin="20,10,0,0" FontSize="15" Grid.Row="5" Grid.Column="1"/>
             <ComboBox Grid.Row="6" Grid.Column="1" DisplayMemberPath="Nombre" mat:HintAssist.Hint="Selecciona un espacio"
                       ItemsSource="{Binding listaEspacios}" Margin="20,10,0,0" x:Name="cmbEspacio"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                      SelectedItem="{Binding articulo.EspacioNavigation}"/>
 
 
         </Grid>
@@ -105,7 +110,7 @@
        Style="{StaticResource MaterialDesignRaisedButton}"
        Background="White"
        Foreground="#2B2A4C"
-        Grid.Row="4" Grid.Column="1" />
+        Grid.Row="4" Grid.Column="1" Click="btnCancelarArticulo_Click" />
 
         <Button x:Name="btnGuardarArticulo" 
        Content="GUARDAR"
@@ -113,7 +118,7 @@
        Style="{StaticResource MaterialDesignRaisedButton}"
        Background="Indigo"
        Foreground="White"
-        Grid.Row="4" Grid.Column="1" />
+        Grid.Row="4" Grid.Column="1" Click="btnGuardarArticulo_Click" />
 
     </Grid>
 </mah:MetroWindow>

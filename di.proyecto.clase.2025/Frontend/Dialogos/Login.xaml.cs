@@ -1,5 +1,6 @@
 ﻿using di.proyecto.clase._2025.Backend.Modelos;
 using di.proyecto.clase._2025.Backend.Servicios;
+using DI.tema2.ejercicio7.Frontend.Mensajes;
 using System.Windows;
 
 namespace di.proyecto.clase._2025.Frontend.Dialogos
@@ -34,13 +35,12 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
                     _ventanaPrincipal.Show();
                     this.Close();
                 } else {
-                    MessageBox.Show("Usuario o clave incorrectos.", "Error de autenticación", 
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    
+                   MensajeError.Mostrar("LOGIN", "Usuario o clave incorrectos.", 3);
                 }
             } else
             {
-                MessageBox.Show("Por favor, introduzca usuario y clave.", "Error de autenticación", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                    MensajeAdvertencia.Mostrar("LOGIN", "Debe introducir usuario y clave.", 3);
             }
         }
 

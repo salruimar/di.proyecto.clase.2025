@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using di.proyecto.clase._2025.MVVM;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,39 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     /// </summary>
     public partial class DialogoArticulo : MetroWindow
     {
-        public DialogoArticulo()
+
+        private MVArticulo _mvArticulo;
+
+        public DialogoArticulo(MVArticulo mvArticulo)
         {
             InitializeComponent();
+            _mvArticulo = mvArticulo;
+        }
+
+        private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _mvArticulo.Inicializa();
+            DataContext = _mvArticulo;
+        }
+
+        private void btnCancelarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        private async void btnGuardarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _mvArticulo.GuardarArticuloAsync();
+
+
+                DialogResult = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar el modelo de artículo: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

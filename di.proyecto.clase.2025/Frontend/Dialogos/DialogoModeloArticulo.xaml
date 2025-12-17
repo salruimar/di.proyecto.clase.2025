@@ -35,21 +35,21 @@
         <TextBlock Text="Los campos en negrita son obligatorios" FontWeight="Bold" FontSize="15" Grid.Row="1"/>
 
         <TextBlock Text="Nombre: " FontSize="15" FontWeight="Bold" Grid.Row="2" Margin="20,10,0,0"/>
-        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding modeloarticulo.Nombre}" x:Name="txtNombre" Grid.Row="3" Margin="20,0,10,0"/>
+        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding modeloArticulo.Nombre}" x:Name="txtNombre" Grid.Row="3" Margin="20,0,10,0"/>
 
         <TextBlock Text="Marca: " FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Margin="20,10,0,0"/>
-        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" x:Name="txtMarca" Text="{Binding modeloarticulo.Marca}"  Grid.Row="3" Grid.Column="1" Margin="20,0,10,0"/>
+        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" x:Name="txtMarca" Text="{Binding modeloArticulo.Marca}"  Grid.Row="3" Grid.Column="1" Margin="20,0,10,0"/>
 
         <TextBlock Text="Modelo: " FontSize="15" FontWeight="Bold" Grid.Row="4" Margin="20,10,0,0"/>
-        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" x:Name="txtModelo" Text="{Binding modeloarticulo.Modelo}" Grid.Row="5" Margin="20,0,10,0"/>
+        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" x:Name="txtModelo" Text="{Binding modeloArticulo.Modelo}" Grid.Row="5" Margin="20,0,10,0"/>
 
         <TextBlock Text="Tipo de artículo: " FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="1" Margin="20,10,0,0"/>
         <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" 
-                  ItemsSource="{Binding listaTipoArticulo}"
+                  ItemsSource="{Binding listaTiposArticulos}"
                   Grid.Row="5" Grid.Column="1" Margin="20,0,10,0" 
                   x:Name="cmbTipoArticulo"
                   DisplayMemberPath="Nombre"
-                  SelectedItem="{Binding modeloarticulo.TipoNavigation}">
+                  SelectedItem="{Binding modeloArticulo.TipoNavigation}">
             <!-- Aquí se pueden añadir los tipos de artículo como ComboBoxItems o enlazar a una colección
             <ComboBoxItem Content="Tipo 1"/>
             <ComboBoxItem Content="Tipo 2"/>
@@ -58,7 +58,7 @@
         </ComboBox>
 
         <TextBlock Text="Descripción: " FontSize="15" FontWeight="Bold" Grid.Row="6" Margin="20,10,0,0"/>
-        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding modeloarticulo.Descripcion}" x:Name="txtDescripcion" Grid.ColumnSpan="2" Grid.Row="7" Margin="20,0,10,0" AcceptsReturn="True"/>
+        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding modeloArticulo.Descripcion}" x:Name="txtDescripcion" Grid.ColumnSpan="2" Grid.Row="7" Margin="20,0,10,0" AcceptsReturn="True"/>
 
         <Button x:Name="btnCancelarModeloArticulo" 
           Content="CANCELAR"
