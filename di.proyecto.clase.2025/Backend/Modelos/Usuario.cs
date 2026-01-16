@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using di.proyecto.clase._2025.MVVM.B;
 using Microsoft.EntityFrameworkCore;
 
 namespace di.proyecto.clase._2025.Backend.Modelos;
@@ -13,7 +14,7 @@ namespace di.proyecto.clase._2025.Backend.Modelos;
 [Index("Rol", Name = "fk_roles_usuario_idx")]
 [Index("Tipo", Name = "fk_tipos_usuario_idx")]
 [Index("Username", Name = "username_UNIQUE", IsUnique = true)]
-public partial class Usuario
+public partial class Usuario : ValidatableViewModel
 {
     [Key]
     [Column("idusuario")]
@@ -25,10 +26,12 @@ public partial class Usuario
     /// </summary>
     [Column("username")]
     [StringLength(20)]
+    [Required]
     public string Username { get; set; } = null!;
 
     [Column("password")]
     [StringLength(200)]
+    [Required]
     public string Password { get; set; } = null!;
 
     [Column("tipo")]
@@ -95,6 +98,7 @@ public partial class Usuario
 
     [ForeignKey("Rol")]
     [InverseProperty("Usuarios")]
+    [Required]
     public virtual Rol RolNavigation { get; set; } = null!;
 
     [InverseProperty("UsuarioNavigation")]
@@ -102,5 +106,6 @@ public partial class Usuario
 
     [ForeignKey("Tipo")]
     [InverseProperty("Usuarios")]
+    [Required]
     public virtual Tipousuario TipoNavigation { get; set; } = null!;
 }

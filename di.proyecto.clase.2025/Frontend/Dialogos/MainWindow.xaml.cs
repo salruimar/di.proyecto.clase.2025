@@ -20,11 +20,13 @@ namespace di.proyecto.clase._2025
     {
         //private Login _ventanaLogin;
         private UCArticulos _ucArticulos;
-        public MainWindow(UCArticulos ucArticulos)
+        private UCUsuarios _ucUsuario;
+        public MainWindow(UCArticulos ucArticulos, UCUsuarios ucUsuario)
         {
             //Login ventanaLogin
             InitializeComponent();
             _ucArticulos = ucArticulos;
+            _ucUsuario = ucUsuario;
             //_ventanaLogin = ventanaLogin;
         }
 
@@ -52,6 +54,9 @@ namespace di.proyecto.clase._2025
             {
                 case "Articulos":
                     hamMenuPrincipal.Content = _ucArticulos;
+                    break;
+                case "Usuarios":
+                    hamMenuPrincipal.Content = _ucUsuario;
                     break;
                 default:
                     break;

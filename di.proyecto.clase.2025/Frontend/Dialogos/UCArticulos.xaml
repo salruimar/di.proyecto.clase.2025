@@ -7,18 +7,27 @@
              xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="800">
-    <DockPanel>
+    <DockPanel x:Name="dpPrincipal">
         <Grid DockPanel.Dock="Top">
             <ToolBar>
                 <!--Agregar modelo artículo-->
+
+                <Button x:Name="btnListarModelos" ToolTip="Listar ModelosArticulo" Click="btnListarModelos_Click"  >
+                    <StackPanel>
+                        <TextBlock Text="Listar Modelos" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                        <mat:PackIcon Kind="FormatListBulleted" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
 
                 <Button x:Name="btnAgregarModelo" ToolTip="Agregar ModeloArticulo" Click="btnAgregarModelo_Click">
                     <StackPanel>
                         <TextBlock Text="Modelos de Artículo" VerticalAlignment="Center" Margin="0,0,0,5"/>
                         <mat:PackIcon Kind="PlusBoxMultipleOutline" HorizontalAlignment="Center"/>
                     </StackPanel>
-
                 </Button>
+
+                <Separator></Separator>
+                
                 <Button x:Name="btnAgregarArticulo" ToolTip="Agregar Articulo" Click="btnAgregarArticulo_Click" >
                     <StackPanel>
                         <TextBlock Text="Artículo" VerticalAlignment="Center" Margin="0,0,0,5"/>
@@ -28,7 +37,7 @@
 
             </ToolBar>
         </Grid>
-        <Grid>
+        <Grid x:Name="panelCentral">
             
         </Grid>
     </DockPanel>

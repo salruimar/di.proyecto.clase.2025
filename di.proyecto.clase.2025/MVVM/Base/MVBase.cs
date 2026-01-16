@@ -14,9 +14,14 @@ namespace di.proyecto.clase._2025.MVVM.Base
         /// Botón del formulario que queremos que se active/desactive en función
         /// de si hay errores en la validación de los campos
         /// </summary>
-        public bool HasErrors => errorCount > 0;
+        public bool HasErrors
+        {
+            get => _hasErrors;
+            set => SetProperty(ref _hasErrors, value);
+        }
 
-        
+        private bool _hasErrors;
+
         /// <summary>
         /// Variable que llev la cuenta de los errores que hay en el formulario
         /// </summary>
@@ -67,8 +72,19 @@ namespace di.proyecto.clase._2025.MVVM.Base
                         throw new Exception("Acción desconocida");
                     }
             }
-            //btnGuardar.IsEnabled = errorCount == 0;
+            UpdateHasErrors();
         }
+
+        /// <summary>
+        /// Actualiza HasErrors en función del contador interno
+        /// </summary>
+
+        private void UpdateHasErrors()
+        {
+            HasErrors = errorCount == 0;
+        }
+
+
         // Métodos CRUD genéricos asíncronos con manejo de excepciones
         /// <summary>
         /// Obtiene la lista asociada a una tabla de la base de datos

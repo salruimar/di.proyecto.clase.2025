@@ -37,7 +37,7 @@ namespace di.proyecto.clase._2025.MVVM
 
         private EspacioRepository _espacioRepository;
 
-
+        private Resultado _resultadoGuardarArticulo;
 
 
 
@@ -66,6 +66,13 @@ namespace di.proyecto.clase._2025.MVVM
             get => _articulo;
             set => SetProperty(ref _articulo, value);
         }
+
+        public Resultado resultadoGuardarArticulo
+        {
+            get => _resultadoGuardarArticulo;
+            set => SetProperty(ref _resultadoGuardarArticulo, value);
+        }
+
         #endregion
         // Aquí puedes añadir propiedades y métodos específicos para el ViewModel de Artículo
         public MVArticulo(ModeloArticuloRespository modeloArticuloRepository,
@@ -126,37 +133,49 @@ namespace di.proyecto.clase._2025.MVVM
             return correcto;
         }
 
-        public async Task<bool> GuardarArticuloAsync()
+
+       public enum Resultado
         {
-            bool correcto = true;
+            Correcto,
+            ErrorInsert,
+            ErrorNumSerieDuplicado
+        }
+
+        public async Task<Resultado> GuardarArticuloAsync()
+        {
+            _resultadoGuardarArticulo = Resultado.Correcto;
+
             try
             {
-                if (articulo.Idarticulo == 0)
+
+                bool numSerieUnico = await _articuloRepository.IsNumserieUniqueAsync(articulo.Numserie);
+                if (!numSerieUnico)
                 {
-                    var lastId = await _articuloRepository.GetLastIdAsync(a => a.Idarticulo);
-
-                    int nextId = (lastId ?? 0) + 1;
-                    //articulo.Idarticulo = nextId;
-
-                    IEnumerable<Articulo> allArticulos = await _articuloRepository.GetAllAsync();
-                    var codigo = allArticulos.Last<Articulo>().Idarticulo + 1;
-                    articulo.Idarticulo = 5009;
-                    
-                    await _articuloRepository.AddAsync(articulo);
-                }
-                else
+                    _resultadoGuardarArticulo = Resultado.ErrorNumSerieDuplicado;
+                } else
                 {
+                    if (articulo.Idarticulo == 0)
+                    {
 
-                    await _articuloRepository.UpdateAsync(articulo);
+                        IEnumerable<Articulo> allArticulos = await _articuloRepository.GetAllAsync();
+                        var codigo = allArticulos.Last<Articulo>().Idarticulo + 1;
+                        articulo.Idarticulo = 5009;
+
+                        await _articuloRepository.AddAsync(articulo);
+                    }
+                    else
+                    {
+                        await _articuloRepository.UpdateAsync(articulo);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 // Capturamos la excepción y la registramos en el log
                 MessageBox.Show("Error al guardar el artículo:\n" + ex.Message, "GESTIÓN ARTÍCULOS", MessageBoxButton.OK, MessageBoxImage.Error);
-                correcto = false;
+                _resultadoGuardarArticulo = Resultado.ErrorInsert;
             }
-            return correcto;
+            return _resultadoGuardarArticulo;
         }
     }
 }

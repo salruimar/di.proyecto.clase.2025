@@ -1,4 +1,5 @@
 ﻿using di.proyecto.clase._2025.MVVM;
+using DI.tema2.ejercicio7.Frontend.Mensajes;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -45,10 +46,17 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         {
             try
             {
-                _mvArticulo.GuardarArticuloAsync();
+                await _mvArticulo.GuardarArticuloAsync();
+                if (_mvArticulo.resultadoGuardarArticulo == MVArticulo.Resultado.ErrorNumSerieDuplicado)
+                {
+                    MensajeError.Mostrar("GESTIÓN ARTÍCULOS", "El número de serie ya existe. Por favor, ingrese un número de serie único.");
+                    txtNumSerie.Focus();
+                } else
+                {
+                    DialogResult = true;
+                }
 
-
-                DialogResult = true;
+                
             }
             catch (Exception ex)
             {

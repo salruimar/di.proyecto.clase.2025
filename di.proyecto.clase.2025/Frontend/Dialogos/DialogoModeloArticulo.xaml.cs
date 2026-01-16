@@ -1,9 +1,12 @@
 ﻿using di.proyecto.clase._2025.Backend.Modelos;
 using di.proyecto.clase._2025.Backend.Servicios;
 using di.proyecto.clase._2025.MVVM;
+using DI.tema2.ejercicio7.Frontend.Mensajes;
 using MahApps.Metro.Controls;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace di.proyecto.clase._2025.Frontend.Dialogos
 {
@@ -24,11 +27,19 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         private async void diagModeloArticulo_Loaded(object sender, RoutedEventArgs e)
         {
             await _mvArticulo.Inicializa();
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
             DataContext = _mvArticulo;
         }
 
         private async void btnGuardarModeloArticulo_Click(object sender, RoutedEventArgs e)
         {
+            //otra posibilidad de impedir que se guarde si hay errores de validacion es usando
+            if (!_mvArticulo.IsValid(this))
+            {
+                MensajeError.Mostrar("MODELO ARTÍCULO", "Existen errores de validación. Por favor, corríjalos antes de guardar.");
+            }
+
+
             try
             {
                _mvArticulo.GuardarModeloArticuloAsync();

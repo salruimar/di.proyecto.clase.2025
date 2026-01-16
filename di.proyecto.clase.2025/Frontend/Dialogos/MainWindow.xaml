@@ -44,7 +44,7 @@
                         </mah:HamburgerMenuImageItem.Thumbnail>
                     </mah:HamburgerMenuImageItem>
 
-                    <mah:HamburgerMenuImageItem Label="Búsquedas" ToolTip="Búsquedas">
+                    <mah:HamburgerMenuImageItem Label="Usuarios" ToolTip="Usuarios" Tag="Usuarios">
                         <mah:HamburgerMenuImageItem.Thumbnail>
                             <BitmapImage UriSource="/Recursos/Iconos/busqueda.png" />
                         </mah:HamburgerMenuImageItem.Thumbnail>

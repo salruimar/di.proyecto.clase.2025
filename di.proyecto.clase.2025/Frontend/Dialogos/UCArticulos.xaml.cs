@@ -23,6 +23,8 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     {
         private DialogoModeloArticulo _dialogoModeloArticulo;
         private DialogoArticulo _dialogoArticulo;
+
+        private UCListadoModelos _ucListadoModelos;
         private readonly IServiceProvider _serviceProvider;
 
         public UCArticulos(IServiceProvider serviceProvider)
@@ -41,6 +43,15 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         {
             _dialogoArticulo = _serviceProvider.GetRequiredService<DialogoArticulo>();
             _dialogoArticulo.ShowDialog();
+        }
+
+        //Botones de listar
+
+        private void btnListarModelos_Click(object sender, RoutedEventArgs e)
+        {
+            _ucListadoModelos = _serviceProvider.GetRequiredService<UCListadoModelos>();
+            panelCentral.Children.Clear();
+            panelCentral.Children.Add(_ucListadoModelos);
         }
     }
 }

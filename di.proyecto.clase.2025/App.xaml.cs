@@ -53,6 +53,9 @@ namespace di.proyecto.clase._2025
             services.AddScoped<IGenericRepository<Usuario>, UsuarioRepository>();
             services.AddScoped<IGenericRepository<Departamento>, DepartamentoRepository>();
             services.AddScoped<IGenericRepository<Espacio>, EspacioRepository>();
+            services.AddScoped<IGenericRepository<Tipousuario>, TipoUsuarioRepository>();
+            services.AddScoped<IGenericRepository<Rol>, RolRepository>();
+            services.AddScoped<IGenericRepository<Grupo>, GrupoRepository>();
             // Registramos los servicios específicos
             services.AddScoped<UsuarioRepository>();
             services.AddScoped<ArticuloRepository>();
@@ -60,14 +63,21 @@ namespace di.proyecto.clase._2025
             services.AddScoped<TipoArticuloRepository>();
             services.AddScoped<DepartamentoRepository>();
             services.AddScoped<EspacioRepository>();
+            services.AddScoped<TipoUsuarioRepository>();
+            services.AddScoped<RolRepository>();
+            services.AddScoped<GrupoRepository>();
             // Registramos las interfaces de usuario
             services.AddTransient<Login>();
             services.AddTransient<UCArticulos>();
+            services.AddTransient<UCUsuarios>();
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
+            services.AddTransient<DialogoUsuario>();
+            services.AddTransient<UCListadoModelos>();
 
             //MVVM
             services.AddTransient<MVArticulo>();
+            services.AddTransient<MVUsuario>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
