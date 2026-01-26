@@ -16,6 +16,8 @@
         </Grid>
         <Grid>
             <DataGrid ItemsSource="{Binding listaModelosArticulos}"
+                      IsReadOnly="True"
+                      SelectedItem="{Binding modeloArticulo}"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       ColumnWidth="*">
@@ -37,7 +39,22 @@
                     <DataGridTextColumn Header="TIPO DE ARTÍCULO" Binding="{Binding TipoNavigation.Nombre}"/>
                     <DataGridTextColumn Header="DESCRIPCION" Binding="{Binding Descripcion}"/>
                     
-                </DataGrid.Columns>    
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Editar Modelo" Click="EditarModelo_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/Recursos/Iconos/editar.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <MenuItem Header="Eliminar Modelo" Click="EliminarModelo_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/Recursos/Iconos/borrar.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
         </Grid>
     </DockPanel>

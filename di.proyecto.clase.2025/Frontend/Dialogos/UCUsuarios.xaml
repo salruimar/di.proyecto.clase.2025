@@ -12,6 +12,13 @@
             <ToolBar>
                 <!--Agregar modelo artículo-->
 
+                <Button x:Name="btnListarUsuarios" ToolTip="Listar Usuarios" Click="btnListarUsuarios_Click"  >
+                    <StackPanel>
+                        <TextBlock Text="Listar Usuarios" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                        <mat:PackIcon Kind="FormatListBulleted" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
                 <Button x:Name="btnAgregarModelo" ToolTip="Agregar ModeloArticulo" Click="btnAgregarUsuario_Click">
                     <StackPanel>
                         <TextBlock Text="Añadir usuario" VerticalAlignment="Center" Margin="0,0,0,5"/>
@@ -22,7 +29,7 @@
 
             </ToolBar>
         </Grid>
-        <Grid>
+        <Grid x:Name="panelPrincipal">
 
         </Grid>
     </DockPanel>

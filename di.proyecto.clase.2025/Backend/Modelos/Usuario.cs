@@ -108,4 +108,10 @@ public partial class Usuario : ValidatableViewModel
     [InverseProperty("Usuarios")]
     [Required]
     public virtual Tipousuario TipoNavigation { get; set; } = null!;
+
+    override
+    public string ToString()
+    {
+        return Nombre + " " + Apellido1 + " " + Apellido2;
+    }
 }

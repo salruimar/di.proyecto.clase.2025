@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
         mc:Ignorable="d"
-        Title="DialogoArticulo" Height="700" Width="800" Loaded="MetroWindow_Loaded">
+        Title="DialogoArticulo" Height="700" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

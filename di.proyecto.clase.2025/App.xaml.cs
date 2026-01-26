@@ -56,6 +56,7 @@ namespace di.proyecto.clase._2025
             services.AddScoped<IGenericRepository<Tipousuario>, TipoUsuarioRepository>();
             services.AddScoped<IGenericRepository<Rol>, RolRepository>();
             services.AddScoped<IGenericRepository<Grupo>, GrupoRepository>();
+
             // Registramos los servicios específicos
             services.AddScoped<UsuarioRepository>();
             services.AddScoped<ArticuloRepository>();
@@ -66,6 +67,7 @@ namespace di.proyecto.clase._2025
             services.AddScoped<TipoUsuarioRepository>();
             services.AddScoped<RolRepository>();
             services.AddScoped<GrupoRepository>();
+
             // Registramos las interfaces de usuario
             services.AddTransient<Login>();
             services.AddTransient<UCArticulos>();
@@ -73,7 +75,10 @@ namespace di.proyecto.clase._2025
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
             services.AddTransient<DialogoUsuario>();
+
             services.AddTransient<UCListadoModelos>();
+            services.AddTransient<UCListadoArticulos>();
+            services.AddTransient<UCListadoUsuarios>();
 
             //MVVM
             services.AddTransient<MVArticulo>();

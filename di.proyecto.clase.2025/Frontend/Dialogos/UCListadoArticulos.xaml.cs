@@ -18,14 +18,14 @@ using System.Windows.Shapes;
 namespace di.proyecto.clase._2025.Frontend.Dialogos
 {
     /// <summary>
-    /// Interaction logic for UCListadoModelos.xaml
+    /// Interaction logic for UCListadoArticulos.xaml
     /// </summary>
-    public partial class UCListadoModelos : UserControl
+    public partial class UCListadoArticulos : UserControl
     {
         private MVArticulo _mvArticulo;
         private readonly IServiceProvider _serviceProvider;
-        private DialogoModeloArticulo _dialogoModeloArticulo;
-        public UCListadoModelos(MVArticulo mvArticulo, IServiceProvider serviceProvider)
+        private DialogoArticulo _dialogoArticulo;
+        public UCListadoArticulos(MVArticulo mvArticulo, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _mvArticulo = mvArticulo;
@@ -34,26 +34,25 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
             await _mvArticulo.Inicializa();
             this.DataContext = _mvArticulo;
         }
 
         private async void EditarModelo_Click(object sender, RoutedEventArgs e)
         {
-            _dialogoModeloArticulo = _serviceProvider.GetRequiredService<DialogoModeloArticulo>();
-            await _dialogoModeloArticulo.Inicializa(_mvArticulo.modeloArticulo);
-            _dialogoModeloArticulo.ShowDialog();
+            _dialogoArticulo = _serviceProvider.GetRequiredService<DialogoArticulo>();
+            await _dialogoArticulo.Inicializa(_mvArticulo.articulo);
 
-            if (_dialogoModeloArticulo.DialogResult == true)
+            _dialogoArticulo.ShowDialog();
+
+            if (_dialogoArticulo.DialogResult == true)
             {
                 //Refrescar la lista de modelos
-                _mvArticulo.listaModelosArticulos.Refresh();
+                _mvArticulo.listaArticulos.Refresh();
             }
-
         }
 
-        private void EliminarModelo_Click(object sender, RoutedEventArgs e)
+        private void EliminarArticulo_Click(object sender, RoutedEventArgs e)
         {
 
         }

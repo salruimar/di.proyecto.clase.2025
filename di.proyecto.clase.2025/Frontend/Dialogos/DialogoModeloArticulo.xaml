@@ -8,7 +8,6 @@
         xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
         mc:Ignorable="d"
         x:Name="diagModeloArticulo"
-        Loaded="diagModeloArticulo_Loaded"
         Title="DialogoModeloArticulo" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>

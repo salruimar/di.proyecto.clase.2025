@@ -3,6 +3,7 @@ using di.proyecto.clase._2025.Backend.Servicios;
 using di.proyecto.clase._2025.MVVM.Base;
 using DI.tema2.ejercicio7.Frontend.Mensajes;
 using System.Windows;
+using System.Windows.Data;
 
 namespace di.proyecto.clase._2025.MVVM
 {
@@ -47,13 +48,15 @@ namespace di.proyecto.clase._2025.MVVM
         private List<Departamento> _listaDepartamentos;
         private List<Espacio> _listaEspacios; 
         private List<Modeloarticulo> _listaModelosArticulos; 
+        private List<Articulo> _listaArticulos; 
         #endregion
         #region Getters y Setters
         public List<Tipoarticulo> listaTiposArticulos => _listaTipoArticulos;
         public List<Usuario> listaUsuarios => _listaUsuarios;
         public List<Departamento> listaDepartamentos => _listaDepartamentos;
         public List<Espacio> listaEspacios => _listaEspacios;
-        public List<Modeloarticulo> listaModelosArticulos => _listaModelosArticulos;
+        public ListCollectionView listaModelosArticulos { get; set; }
+        public ListCollectionView listaArticulos { get; set; }
 
         public Modeloarticulo modeloArticulo
         {
@@ -88,8 +91,6 @@ namespace di.proyecto.clase._2025.MVVM
             _articuloRepository = articuloRepository;
             _departamentoRepository = departamentoRepository;
             _espacioRepository = espacioRepository;
-            _modeloArticulo = new Modeloarticulo();
-            _articulo = new Articulo();
         }
 
         public async Task Inicializa()
@@ -101,6 +102,9 @@ namespace di.proyecto.clase._2025.MVVM
                 _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
                 _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
                 _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
+                listaModelosArticulos = new ListCollectionView(_listaModelosArticulos);
+                _listaArticulos = await GetAllAsync<Articulo>(_articuloRepository);
+                listaArticulos = new ListCollectionView(_listaArticulos);
             }
             catch (Exception ex)
             {

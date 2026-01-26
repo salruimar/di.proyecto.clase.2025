@@ -1,4 +1,5 @@
-﻿using di.proyecto.clase._2025.MVVM;
+﻿using di.proyecto.clase._2025.Backend.Modelos;
+using di.proyecto.clase._2025.MVVM;
 using DI.tema2.ejercicio7.Frontend.Mensajes;
 using MahApps.Metro.Controls;
 using System;
@@ -25,15 +26,18 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
 
         private MVArticulo _mvArticulo;
 
+
         public DialogoArticulo(MVArticulo mvArticulo)
         {
             InitializeComponent();
             _mvArticulo = mvArticulo;
         }
 
-        private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        public async Task Inicializa(Articulo articulo)
         {
             await _mvArticulo.Inicializa();
+            _mvArticulo.articulo = articulo;
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
             DataContext = _mvArticulo;
         }
 

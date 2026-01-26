@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using di.proyecto.clase._2025.Backend.Modelos;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         private DialogoArticulo _dialogoArticulo;
 
         private UCListadoModelos _ucListadoModelos;
+        private UCListadoArticulos _ucListadoArticulos;
         private readonly IServiceProvider _serviceProvider;
 
         public UCArticulos(IServiceProvider serviceProvider)
@@ -36,12 +38,14 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         private void btnAgregarModelo_Click(object sender, RoutedEventArgs e)
         {
             _dialogoModeloArticulo = _serviceProvider.GetRequiredService<DialogoModeloArticulo>();
+            _dialogoModeloArticulo.Inicializa(new Modeloarticulo());
             _dialogoModeloArticulo.ShowDialog();
         }
 
         private void btnAgregarArticulo_Click(object sender, RoutedEventArgs e)
         {
             _dialogoArticulo = _serviceProvider.GetRequiredService<DialogoArticulo>();
+            _dialogoArticulo.Inicializa(new Articulo());
             _dialogoArticulo.ShowDialog();
         }
 
@@ -52,6 +56,13 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             _ucListadoModelos = _serviceProvider.GetRequiredService<UCListadoModelos>();
             panelCentral.Children.Clear();
             panelCentral.Children.Add(_ucListadoModelos);
+        }
+
+        private void btnListarArticulos_Click(object sender, RoutedEventArgs e)
+        {
+            _ucListadoArticulos = _serviceProvider.GetRequiredService<UCListadoArticulos>();
+            panelCentral.Children.Clear();
+            panelCentral.Children.Add(_ucListadoArticulos);
         }
     }
 }

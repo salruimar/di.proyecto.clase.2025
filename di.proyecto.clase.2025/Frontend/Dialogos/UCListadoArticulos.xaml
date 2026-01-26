@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="di.proyecto.clase._2025.Frontend.Dialogos.UCListadoArticulos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <TextBlock Text="LISTADO DE ARTÍCULOS" 
+                       FontSize="25" FontWeight="Bold" 
+                       HorizontalAlignment="Center" 
+                       Margin="20"
+                       Foreground="Purple"/>
+        </Grid>
+        <Grid>
+            <DataGrid ItemsSource="{Binding listaArticulos}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectedItem="{Binding articulo}"
+                      CanUserAddRows="False"
+                      ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Numserie}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="BarcodeScan"/>
+                                <TextBlock Text="NÚMERO DE SERIE"/>
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Binding="{Binding Estado}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="StateMachine"/>
+                                <TextBlock Text="ESTADO"/>
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="Calendar"/>
+                                <TextBlock Text="FECHA DE ALTA"/>
+                            </StackPanel>
+                        </DataGridTemplateColumn.Header>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Fechaalta}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Binding="{Binding UsuarioaltaNavigation}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="Account"/>
+                                <TextBlock Text="USUARIO"/>
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+
+                    <DataGridTextColumn Binding="{Binding ModeloNavigation.Nombre}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="BoxUp"/>
+                                <TextBlock Text="MODELO"/>
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn  Binding="{Binding EspacioNavigation.Nombre}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="AlphaEBox"/>
+                                <TextBlock Text="ESPACIO" />
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn >
+                        <DataGridTemplateColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="InfoBox"/>
+                                <TextBlock Text="DATOS" />
+                            </StackPanel>
+                        </DataGridTemplateColumn.Header>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="Departamento"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding DepartamentoNavigation.Nombre}"/>
+
+                                    <TextBlock Text="NºPréstamos" Grid.Row="1"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Salida.Count}"/>
+                                </Grid>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+
+                <!-- ROW DETAILS -->
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top">
+                                <TextBlock Text="LISTADO DE PRÉSTAMOS DE ARTÍCULO"
+                                               FontSize="14" FontWeight="Bold" Margin="10" />
+                            </Grid>
+                            <Grid>
+                                <ListBox ItemsSource="{Binding Salida}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderBrush="Purple"
+                                                    BorderThickness="1"
+                                                    Margin="5"
+                                                    Padding="5">
+                                                <StackPanel>
+                                                    <TextBlock>
+                                                        <Run Text="Fecha de Préstamo: " FontWeight="Bold"/>
+                                                        <Run Text="{Binding Fechasalida, StringFormat=d}"/>
+                                                    </TextBlock>
+
+                                                    <TextBlock>
+                                                        <Run Text="Fecha de devolución: " FontWeight="Bold"/>
+                                                        <Run Text="{Binding Fechadevolucion, StringFormat=d}"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </DockPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Editar Artículo" Click="EditarModelo_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/Recursos/Iconos/editar.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <MenuItem Header="Eliminar Artículo" Click="EliminarArticulo_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/Recursos/Iconos/borrar.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</UserControl>

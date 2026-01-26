@@ -12,7 +12,9 @@
   <ItemGroup>
     <None Remove="Recursos\Iconos\administracion.png" />
     <None Remove="Recursos\Iconos\articulo.png" />
+    <None Remove="Recursos\Iconos\borrar.png" />
     <None Remove="Recursos\Iconos\busqueda.png" />
+    <None Remove="Recursos\Iconos\editar.png" />
     <None Remove="Recursos\Iconos\informacion.png" />
     <None Remove="Recursos\Iconos\inventario.png" />
     <None Remove="Recursos\Iconos\matisse.png" />
@@ -41,7 +43,9 @@
   <ItemGroup>
     <Resource Include="Recursos\Iconos\administracion.png" />
     <Resource Include="Recursos\Iconos\articulo.png" />
+    <Resource Include="Recursos\Iconos\borrar.png" />
     <Resource Include="Recursos\Iconos\busqueda.png" />
+    <Resource Include="Recursos\Iconos\editar.png" />
     <Resource Include="Recursos\Iconos\informacion.png" />
     <Resource Include="Recursos\Iconos\inventario.png" />
     <Resource Include="Recursos\Iconos\matisse.png" />

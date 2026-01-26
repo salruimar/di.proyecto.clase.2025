@@ -22,6 +22,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
     public partial class UCUsuarios : UserControl
     {
         private DialogoUsuario _dialogoUsuario;
+        private UCListadoUsuarios _ucListadoUsuarios;
         private readonly IServiceProvider _serviceProvider;
 
         public UCUsuarios(IServiceProvider serviceProvider)
@@ -34,6 +35,13 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         {
             _dialogoUsuario = _serviceProvider.GetRequiredService<DialogoUsuario>();
             _dialogoUsuario.ShowDialog();
+        }
+
+        private void btnListarUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            _ucListadoUsuarios = _serviceProvider.GetRequiredService<UCListadoUsuarios>();
+            panelPrincipal.Children.Clear();
+            panelPrincipal.Children.Add(_ucListadoUsuarios);
         }
     }
 }
