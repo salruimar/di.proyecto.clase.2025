@@ -38,7 +38,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
             this.DataContext = _mvArticulo;
         }
 
-        private async void EditarModelo_Click(object sender, RoutedEventArgs e)
+        private async void EditarArticulo_Click(object sender, RoutedEventArgs e)
         {
             _dialogoArticulo = _serviceProvider.GetRequiredService<DialogoArticulo>();
             await _dialogoArticulo.Inicializa(_mvArticulo.articulo);
@@ -47,7 +47,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
 
             if (_dialogoArticulo.DialogResult == true)
             {
-                //Refrescar la lista de modelos
+                //Refrescar la lista de artículos
                 _mvArticulo.listaArticulos.Refresh();
             }
         }
@@ -57,6 +57,14 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
 
         }
 
+        private void btnLimpiarFiltros_Click(object sender, RoutedEventArgs e)
+        {
+            _mvArticulo.LimpiarFiltros();
+        }
 
+        private void btnFiltrar_Click(object sender, RoutedEventArgs e)
+        {
+            _mvArticulo.Filtrar();
+        }
     }
 }

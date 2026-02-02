@@ -40,9 +40,23 @@ namespace di.proyecto.clase._2025.MVVM
 
         private Resultado _resultadoGuardarArticulo;
 
+        //cosas de filtros
+        private Tipoarticulo _tipoArticuloSeleccionado;
+        private List<Predicate<Modeloarticulo>> _criteriosModelo;
+        private Predicate<Modeloarticulo> _criteriosTipoArticulo;
 
+        private DateTime _fechaInicioFiltro = DateTime.Now;
+        private DateTime _fechaFinFiltro = DateTime.Now;
+        private Espacio _espacioSeleccionado;
+        private String _numSerieFiltro;
+        private int? _numSalidasFiltro;
+        private List<Predicate<Articulo>> _criteriosArticulo;
+        private Predicate<Articulo> _criteriosFechaAlta;
+        private Predicate<Articulo> _criteriosNumSerie;
+        private Predicate<Articulo> _criteriosEspacio;
+        private Predicate<Articulo> _criterioNumSalidas;
 
-
+        //listas
         private List<Tipoarticulo> _listaTipoArticulos;
         private List<Usuario> _listaUsuarios;
         private List<Departamento> _listaDepartamentos;
@@ -50,6 +64,7 @@ namespace di.proyecto.clase._2025.MVVM
         private List<Modeloarticulo> _listaModelosArticulos; 
         private List<Articulo> _listaArticulos; 
         #endregion
+
         #region Getters y Setters
         public List<Tipoarticulo> listaTiposArticulos => _listaTipoArticulos;
         public List<Usuario> listaUsuarios => _listaUsuarios;
@@ -57,6 +72,9 @@ namespace di.proyecto.clase._2025.MVVM
         public List<Espacio> listaEspacios => _listaEspacios;
         public ListCollectionView listaModelosArticulos { get; set; }
         public ListCollectionView listaArticulos { get; set; }
+
+        public Predicate<object> predicadoFiltroModeloArticulo;
+        public Predicate<object> predicadoFiltroArticulo;
 
         public Modeloarticulo modeloArticulo
         {
@@ -74,6 +92,42 @@ namespace di.proyecto.clase._2025.MVVM
         {
             get => _resultadoGuardarArticulo;
             set => SetProperty(ref _resultadoGuardarArticulo, value);
+        }
+
+        public Tipoarticulo tipoArticuloSeleccionado
+        {
+            get => _tipoArticuloSeleccionado;
+            set => SetProperty(ref _tipoArticuloSeleccionado, value);
+        }
+
+        public DateTime fechaInicioFiltro
+        {
+            get => _fechaInicioFiltro;
+            set => SetProperty(ref _fechaInicioFiltro, value);
+        }
+
+        public DateTime fechaFinFiltro
+        {
+            get => _fechaFinFiltro;
+            set => SetProperty(ref _fechaFinFiltro, value);
+        }
+
+        public Espacio espacioSeleccionado
+        {
+            get => _espacioSeleccionado;
+            set => SetProperty(ref _espacioSeleccionado, value);
+        }
+
+        public String numSerieFiltro
+        {
+            get => _numSerieFiltro;
+            set => SetProperty(ref _numSerieFiltro, value);
+        }
+
+        public int? numSalidasFiltro
+        {
+            get => _numSalidasFiltro;
+            set => SetProperty(ref _numSalidasFiltro, value);
         }
 
         #endregion
@@ -97,6 +151,11 @@ namespace di.proyecto.clase._2025.MVVM
         {
             try
             {
+
+
+                 predicadoFiltroModeloArticulo = new Predicate<object>(FiltroCriteriosModeloArticulo);
+                 predicadoFiltroArticulo = new Predicate<object>(FiltroCriteriosArticulo);
+
                 _listaTipoArticulos = await GetAllAsync<Tipoarticulo>(_tipoArticuloRepository);
                 _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
                 _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
@@ -105,12 +164,101 @@ namespace di.proyecto.clase._2025.MVVM
                 listaModelosArticulos = new ListCollectionView(_listaModelosArticulos);
                 _listaArticulos = await GetAllAsync<Articulo>(_articuloRepository);
                 listaArticulos = new ListCollectionView(_listaArticulos);
+
+                _criteriosModelo = new List<Predicate<Modeloarticulo>>();
+                _criteriosArticulo = new List<Predicate<Articulo>>();
+
+                InicializaCriterios();
             }
             catch (Exception ex)
             {
                 MensajeError.Mostrar("GESTIÓN ARTÍCULOS", "Error al cargar los tipos de artículos\n" +
                     "No puedo conectar con la base de datos", 0);
             }
+        }
+
+        private void InicializaCriterios()
+        {
+            _criteriosTipoArticulo = new Predicate<Modeloarticulo>(m => m.TipoNavigation != null 
+            && m.TipoNavigation.Equals(_tipoArticuloSeleccionado));
+
+            _criteriosFechaAlta = new Predicate<Articulo>(a => a.Fechaalta >= fechaInicioFiltro && a.Fechaalta <= fechaFinFiltro); 
+            _criteriosNumSerie = new Predicate<Articulo>(a => a.Numserie != null && a.Numserie.Equals(_numSerieFiltro));
+            _criteriosEspacio = new Predicate<Articulo>(a => a.EspacioNavigation != null && a.EspacioNavigation.Equals(_espacioSeleccionado));
+            _criterioNumSalidas = new Predicate<Articulo>(a => a.Salida.Count == _numSalidasFiltro);
+        }
+
+        private void AddCriterios()
+        {
+            _criteriosModelo.Clear();
+            if (_tipoArticuloSeleccionado != null)
+            {
+                _criteriosModelo.Add(_criteriosTipoArticulo);
+            }
+            
+            _criteriosArticulo.Clear();
+            if (_fechaInicioFiltro.Day != DateTime.Now.Day && _fechaFinFiltro.Day != DateTime.Now.Day && _fechaInicioFiltro < _fechaFinFiltro)
+            {
+                _criteriosArticulo.Add(_criteriosFechaAlta);
+            }
+            if (!String.IsNullOrEmpty(_numSerieFiltro))
+            {
+                _criteriosArticulo.Add(_criteriosNumSerie);
+            }
+            if (_espacioSeleccionado != null)
+            {
+                _criteriosArticulo.Add(_criteriosEspacio);
+            }
+            if (_numSalidasFiltro != null)
+            {
+                _criteriosArticulo.Add(_criterioNumSalidas);
+            }
+        }
+
+        private bool FiltroCriteriosModeloArticulo(object item)
+        {
+            bool correcto = true;
+            Modeloarticulo modelo = (Modeloarticulo)item;
+
+            if (_criteriosModelo != null)
+            {
+                correcto = _criteriosModelo.TrueForAll(criterio => criterio(modelo));
+            }
+
+            return correcto;
+        }
+
+        private bool FiltroCriteriosArticulo(object item)
+        {
+            bool correcto = true;
+            Articulo articulo = (Articulo)item;
+
+            if (_criteriosModelo != null)
+            {
+                correcto = _criteriosArticulo.TrueForAll(criterio => criterio(articulo));
+            }
+
+            return correcto;
+        }
+
+        public void Filtrar()
+        {
+            AddCriterios();
+            listaModelosArticulos.Filter = predicadoFiltroModeloArticulo;
+            listaArticulos.Filter = predicadoFiltroArticulo;
+        }
+
+        public void LimpiarFiltros()
+        {
+            tipoArticuloSeleccionado = null;
+            listaModelosArticulos.Filter = null;
+
+            fechaInicioFiltro = DateTime.Now;
+            fechaFinFiltro = DateTime.Now;
+            numSerieFiltro = null;
+            espacioSeleccionado = null;
+            numSalidasFiltro = null;
+            listaArticulos.Filter = null;
         }
 
         public async Task<bool> GuardarModeloArticuloAsync()

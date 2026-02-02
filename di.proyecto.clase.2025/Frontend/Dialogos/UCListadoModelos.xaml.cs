@@ -25,6 +25,7 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
         private MVArticulo _mvArticulo;
         private readonly IServiceProvider _serviceProvider;
         private DialogoModeloArticulo _dialogoModeloArticulo;
+
         public UCListadoModelos(MVArticulo mvArticulo, IServiceProvider serviceProvider)
         {
             InitializeComponent();
@@ -58,6 +59,15 @@ namespace di.proyecto.clase._2025.Frontend.Dialogos
 
         }
 
+        private void cbTipoArticulo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _mvArticulo.Filtrar();
+        }
+
+        private void btnLimpiarFiltros_Click(object sender, RoutedEventArgs e)
+        {
+            _mvArticulo.LimpiarFiltros();
+        }
 
     }
 }
