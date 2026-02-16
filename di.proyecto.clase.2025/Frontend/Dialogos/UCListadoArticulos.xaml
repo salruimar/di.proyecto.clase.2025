@@ -60,7 +60,7 @@
                 <TextBlock Text="Num salidas: " Margin="10,10,5,10" VerticalAlignment="Center" Foreground="Black"/>
                 <Slider x:Name="sliderNumSalidas"
                         Minimum="0"
-                        Maximum="100"
+                        Maximum="{Binding maxSalidasFiltro}"
                         Width="150"
                         Margin="0,10,10,10"
                         Value="{Binding numSalidasFiltro}"

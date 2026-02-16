@@ -10,11 +10,58 @@
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <DockPanel>
         <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
             <TextBlock Text="LISTADO DE USUARIOS" 
                        FontSize="25" FontWeight="Bold" 
                        HorizontalAlignment="Center" 
                        Margin="20"
                        Foreground="Purple"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <TextBlock Text="FILTROS" Margin="10" VerticalAlignment="Center" Foreground="Black"/>
+
+                <TextBlock Text="Tipo de usuario: " VerticalAlignment="Center" Foreground="Black"/>
+                <CheckBox Content="Profesor" 
+                          Margin="5" 
+                          x:Name="chkProfesor" 
+                          VerticalAlignment="Center" 
+                          Foreground="Black"/>
+
+                <CheckBox Content="Alumno" 
+                          Margin="5" 
+                          x:Name="chkAlumno" 
+                          VerticalAlignment="Center" 
+                          Foreground="Black"/>
+
+                <CheckBox Content="P.A.S" 
+                          Margin="5" 
+                          x:Name="chkPAS" 
+                          VerticalAlignment="Center" 
+                          Foreground="Black"/>
+
+                <Button Content="Filtrar"
+                Margin="10"
+                x:Name="btnFiltrar"
+                Click="btnFiltrar_Click"
+                Style="{StaticResource MahApps.Styles.Button}"
+                Background="#2B2A4C"
+                Foreground="White"/>
+
+                <Button Content="X"
+                Margin="10"
+                x:Name="btnLimpiarFiltros"
+                Click="btnLimpiarFiltros_Click"
+                Style="{StaticResource MahApps.Styles.Button}"
+                Background="#2B2A4C"
+                Foreground="White"/>
+
+
+            </StackPanel>
+            
         </Grid>
         <Grid>
             <DataGrid ItemsSource="{Binding listaUsuarios}"

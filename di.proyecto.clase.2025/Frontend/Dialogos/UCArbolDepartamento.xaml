@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="di.proyecto.clase._2025.Frontend.Dialogos.UCArbolDepartamento"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ent="clr-namespace:di.proyecto.clase._2025.Backend.Modelos"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <DockPanel>
+
+        <Grid DockPanel.Dock="Top">
+            <TextBlock Text="ADMINISTRACION DE DEPARTAMENTOS" FontSize="28" HorizontalAlignment="Center" Margin="0,20,0,20" Foreground="DarkViolet"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Left">
+            <TreeView x:Name="treeDepartamento" ItemsSource="{Binding listaDepartamentos}">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type ent:Departamento}" ItemsSource="{Binding Usuarios}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="Bathroom" Width="16" Foreground="#2B2A4C"></mat:PackIcon>
+                            <TextBlock Text="{Binding Nombre}" Margin="10,0,0,0"></TextBlock>
+                            <TextBlock FontWeight="Bold">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" ({0})">
+                                        <Binding Path="Usuarios.Count"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type ent:Usuario}" ItemsSource="{Binding Salida}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="PackageVariant" Width="16" Foreground="DarkViolet"></mat:PackIcon>
+                            <TextBlock Text="{Binding}" Margin="10,0,0,0"></TextBlock>
+                            <TextBlock FontWeight="Bold">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" ({0})">
+                                        <Binding Path="Salidas.Count"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type ent:Salidum}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="Sync" Width="16" Foreground="#444"></mat:PackIcon>
+                            
+                            <TextBlock Margin="10,3,0,0" Foreground="#222">
+                                <Run Text="Salida: "/>
+                               <Run Text="{Binding Fechasalida, StringFormat='dd/MM/yyyy'}"/>
+                            </TextBlock>
+                            <TextBlock Margin="10,3,0,0" Foreground="#222">
+                                <Run Text="Devolución: "/>
+                               <Run Text="{Binding Fechadevolucion, StringFormat='dd/MM/yyyy'}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </Grid>
+
+        <Grid x:Name="panelCentral">
+
+        </Grid>
+    </DockPanel>
+</UserControl>

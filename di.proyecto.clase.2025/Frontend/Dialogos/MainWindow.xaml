@@ -68,6 +68,12 @@
                         </mah:HamburgerMenuImageItem.Thumbnail>
                     </mah:HamburgerMenuImageItem>
 
+                    <mah:HamburgerMenuImageItem Label="Administracion" ToolTip="Administracion" Tag="Administracion">
+                        <mah:HamburgerMenuImageItem.Thumbnail>
+                            <BitmapImage UriSource="/Recursos/Iconos/administracion2.png" />
+                        </mah:HamburgerMenuImageItem.Thumbnail>
+                    </mah:HamburgerMenuImageItem>
+
                     <mah:HamburgerMenuImageItem Label="Informacion" ToolTip="Informacion">
                         <mah:HamburgerMenuImageItem.Thumbnail>
                             <BitmapImage UriSource="/Recursos/Iconos/informacion.png" />

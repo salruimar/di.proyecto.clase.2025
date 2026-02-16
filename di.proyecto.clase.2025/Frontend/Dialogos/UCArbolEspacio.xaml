@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="di.proyecto.clase._2025.Frontend.Dialogos.UCArbolEspacio"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ent="clr-namespace:di.proyecto.clase._2025.Backend.Modelos"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1200" Loaded="UserControl_Loaded">
+      <DockPanel>
+
+        <Grid DockPanel.Dock="Top">
+            <TextBlock Text="ADMINISTRACION DE ESPACIOS" FontSize="28" HorizontalAlignment="Center" Margin="0,20,0,20" Foreground="DarkViolet"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Left">
+            <TreeView x:Name="treeEspacios" ItemsSource="{Binding listaEspacios}"
+                      SelectedItemChanged="treeEspacios_SelectedItemChanged">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type ent:Espacio}" ItemsSource="{Binding Articulos}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="Bathroom" Width="16" Foreground="#2B2A4C"></mat:PackIcon>
+                            <TextBlock Text="{Binding Nombre}" Margin="10,0,0,0"></TextBlock>
+                            <TextBlock FontWeight="Bold">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" ({0})">
+                                        <Binding Path="Articulos.Count"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type ent:Articulo}" ItemsSource="{Binding Salida}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="PackageVariant" Width="16" Foreground="DarkViolet"></mat:PackIcon>
+                            <TextBlock Text="{Binding Numserie}" Margin="10,0,0,0"></TextBlock>
+                            <TextBlock FontWeight="Bold">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat=" ({0})">
+                                        <Binding Path="Salidas.Count"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type ent:Salidum}">
+                        <StackPanel Orientation="Horizontal">
+                            <mat:PackIcon Kind="Sync" Width="16" Foreground="#444"></mat:PackIcon>
+                            <TextBlock Text="{Binding Fechasalida, StringFormat='dd/MM/yyyy'}" Margin="10,0,0,0" Foreground="#222"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="MODIFICA LAS PROPIEDADES DEL ARTÍCULO" Margin="20" FontSize="16"
+                       Foreground="DarkViolet" Grid.ColumnSpan="3"/>
+
+            <TextBox Grid.Row="1" mat:HintAssist.Hint="Número de serie" Foreground="#444" Margin="20,0,20,0" Width="150" Text="{Binding articuloSeleccionado.Numserie}"/>
+            <ComboBox Grid.Row="2" mat:HintAssist.Hint="Modelo de artículo" Margin="20" Width="150" Foreground="#444"
+                      ItemsSource="{Binding listaModelos}" SelectedItem="{Binding articuloSeleccionado.ModeloNavigation}"/>
+
+            <DatePicker Grid.Row="1" Grid.Column="1" mat:HintAssist.Hint="Fecha de alta" Width="150" Foreground="#444"
+                        SelectedDate="{Binding articuloSeleccionado.Fechaalta}"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" mat:HintAssist.Hint="Usuario" Margin="20" Width="150" Foreground="#444"
+                      ItemsSource="{Binding listaUsuarios}" SelectedItem="{Binding articuloSeleccionado.UsuarioNavigation}"/>
+
+            <ComboBox Grid.Row="1" Grid.Column="2"  Foreground="#444"
+                      mat:HintAssist.Hint="Estado del artículo" Margin="20" Width="150"
+                      ItemsSource="{Binding listaUsuarios}" SelectedItem="{Binding articuloSeleccionado.UsuarioNavigation}"/>
+            <ComboBox Grid.Row="2" Grid.Column="2" Foreground="#444"
+                      mat:HintAssist.Hint="Departamento" Margin="20" Width="150"
+                      ItemsSource="{Binding listaDepartamentos}" SelectedItem="{Binding articuloSeleccionado.DepartamentoNavigation}"/>
+
+        </Grid>
+        <Grid x:Name="panelCentral">
+            <DataGrid x:Name="dgArticulosPorEspacio" AutoGenerateColumns="False"
+                      ColumnWidth="*" CanUserAddRows="False" SelectedItem="{Binding articuloSeleccionado}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Número de serie"
+                                        Binding="{Binding Numserie}"/>
+                    <DataGridTextColumn Header="Modelo del artículo"
+                                        Binding="{Binding Modeloarticulo.Nombre}"/>
+                    <DataGridTextColumn Header="Usuario"
+                                        Binding="{Binding UsuarioaltaNavigation}"/>
+
+                    <DataGridTemplateColumn Header="Fechas">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Fechaalta}" IsEnabled="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+
+          
+    </DockPanel>
+</UserControl>

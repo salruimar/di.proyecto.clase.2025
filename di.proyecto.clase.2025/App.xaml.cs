@@ -72,6 +72,12 @@ namespace di.proyecto.clase._2025
             services.AddTransient<Login>();
             services.AddTransient<UCArticulos>();
             services.AddTransient<UCUsuarios>();
+            services.AddTransient<UCAdministracion>();
+
+            services.AddTransient<UCArbolEspacio>();
+            services.AddTransient<UCArbolDepartamento>();
+            services.AddTransient<UCArbolGrupo>();
+
             services.AddTransient<DialogoModeloArticulo>();
             services.AddTransient<DialogoArticulo>();
             services.AddTransient<DialogoUsuario>();
@@ -83,6 +89,9 @@ namespace di.proyecto.clase._2025
             //MVVM
             services.AddTransient<MVArticulo>();
             services.AddTransient<MVUsuario>();
+            services.AddTransient<MVEspacio>();
+            services.AddTransient<MVDepartamento>();
+
         }
 
         protected override void OnStartup(StartupEventArgs e)

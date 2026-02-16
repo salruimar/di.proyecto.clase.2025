@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="di.proyecto.clase._2025.Frontend.Dialogos.UCEspacios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:di.proyecto.clase._2025.Frontend.Dialogos"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <TextBlock Text="ADMINISTRACIÓN DE ESPACIOS"
+                   Margin="10"
+                   HorizontalAlignment="Center"
+                   FontSize="28"
+                   FontWeight="Bold" Foreground="DarkViolet"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Left">
+
+        </Grid>
+
+        <Grid x:Name="panelCentral">
+
+        </Grid>
+    </DockPanel>
+</UserControl>

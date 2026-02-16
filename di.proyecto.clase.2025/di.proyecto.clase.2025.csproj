@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="Recursos\Iconos\administracion.png" />
+    <None Remove="Recursos\Iconos\administracion2.png" />
     <None Remove="Recursos\Iconos\articulo.png" />
     <None Remove="Recursos\Iconos\borrar.png" />
     <None Remove="Recursos\Iconos\busqueda.png" />
@@ -42,6 +43,7 @@
 
   <ItemGroup>
     <Resource Include="Recursos\Iconos\administracion.png" />
+    <Resource Include="Recursos\Iconos\administracion2.png" />
     <Resource Include="Recursos\Iconos\articulo.png" />
     <Resource Include="Recursos\Iconos\borrar.png" />
     <Resource Include="Recursos\Iconos\busqueda.png" />

@@ -17,31 +17,21 @@ using System.Windows.Shapes;
 namespace di.proyecto.clase._2025.Frontend.Dialogos
 {
     /// <summary>
-    /// Interaction logic for UCListarUsuarios.xaml
+    /// Interaction logic for UCArbolGrupo.xaml
     /// </summary>
-    public partial class UCListadoUsuarios : UserControl
+    public partial class UCArbolGrupo : UserControl
     {
-        private MVUsuario _mvUsuario;
-        public UCListadoUsuarios(MVUsuario mVUsuario)
+        private MVGrupo _mvGrupo;
+        public UCArbolGrupo(MVGrupo mvGrupo)
         {
+            _mvGrupo = mvGrupo;
             InitializeComponent();
-            _mvUsuario = mVUsuario;
         }
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            await _mvUsuario.Inicializa();
-            this.DataContext = _mvUsuario;
-        }
-
-        private void btnFiltrar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnLimpiarFiltros_Click(object sender, RoutedEventArgs e)
-        {
-
+            await _mvGrupo.Inicializa();
+            DataContext = _mvGrupo;
         }
     }
 }

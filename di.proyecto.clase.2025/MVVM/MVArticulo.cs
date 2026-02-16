@@ -50,6 +50,7 @@ namespace di.proyecto.clase._2025.MVVM
         private Espacio _espacioSeleccionado;
         private String _numSerieFiltro;
         private int? _numSalidasFiltro;
+        private int _maxSalidasFiltro;
         private List<Predicate<Articulo>> _criteriosArticulo;
         private Predicate<Articulo> _criteriosFechaAlta;
         private Predicate<Articulo> _criteriosNumSerie;
@@ -79,7 +80,8 @@ namespace di.proyecto.clase._2025.MVVM
         public Modeloarticulo modeloArticulo
         {
             get => _modeloArticulo;
-            set => SetProperty(ref _modeloArticulo, value);
+            set { _modeloArticulo = value;
+            OnPropertyChanged(nameof(modeloArticulo)) ;}
         }
 
         public Articulo articulo
@@ -129,6 +131,11 @@ namespace di.proyecto.clase._2025.MVVM
             get => _numSalidasFiltro;
             set => SetProperty(ref _numSalidasFiltro, value);
         }
+        public int maxSalidasFiltro
+        {
+            get => _maxSalidasFiltro;
+            private set => SetProperty(ref _maxSalidasFiltro, value);
+        }
 
         #endregion
         // Aquí puedes añadir propiedades y métodos específicos para el ViewModel de Artículo
@@ -168,6 +175,8 @@ namespace di.proyecto.clase._2025.MVVM
                 _criteriosModelo = new List<Predicate<Modeloarticulo>>();
                 _criteriosArticulo = new List<Predicate<Articulo>>();
 
+
+                CalculaMaxSalidasFiltro();
                 InicializaCriterios();
             }
             catch (Exception ex)
@@ -261,6 +270,31 @@ namespace di.proyecto.clase._2025.MVVM
             listaArticulos.Filter = null;
         }
 
+        public void CalculaMaxSalidasFiltro()
+        {
+            try
+            {
+                if (listaArticulos == null)
+                {
+                    maxSalidasFiltro = 0;
+                    return;
+                }
+
+                // Enumeramos la vista (items actualmente visibles en listaArticulos)
+                var max = listaArticulos
+                    .OfType<Articulo>()
+                    .Select(a => a.Salida?.Count ?? 0)
+                    .DefaultIfEmpty(0)
+                    .Max();
+
+                maxSalidasFiltro = max;
+            }
+            catch
+            {
+                // En caso de error dejamos 0 (no lanzar para no romper la UI)
+                maxSalidasFiltro = 0;
+            }
+        }
         public async Task<bool> GuardarModeloArticuloAsync()
         {
             bool correcto = true;
